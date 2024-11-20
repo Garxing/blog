@@ -102,8 +102,7 @@ sudo docker pull hello-world
 wsl
 ```
 ### 5.2 拉取Ollama的docker镜像
-<p>第二步，用docker<b>拉取镜像</b>，并创建名字叫<b>ollama</b>的容器</p>
-<p>Ollama有CPU版本和GPU版本，CPU版本</b>和<b>GPU版本</b>两个选择一个即可，建议用GPU版本，否则推理速度非常慢</p>
+<p>第二步，用docker<b>拉取镜像</b>，并创建名字叫<b>ollama</b>的容器。Ollama有CPU版本和GPU版本，<b>CPU版本</b>和<b>GPU版本</b>两个选择一个即可，建议用GPU版本，否则推理速度非常慢</p>
 <p>情况1：CPU版本，直接输入</p>
 
 ```bash
