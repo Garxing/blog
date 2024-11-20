@@ -134,13 +134,13 @@ docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-
 即可，然后在<b>本地浏览器输入</b>[http://localhost:3000](http://localhost:3000) 中即可看到UI界面，自行创建<b>邮箱和密码</b>即可进入。进入后，即可看到Ollama容器中正在运行的模型。
 
 ### 5.5 打开Docker Desktop
-<p>当<b>5.3</b>和<b>5.4</b>都在<b> Power Shell </b>中运行时，那么，<b> Docker Desktop </b>中的<b> container </b>栏中会出现两个新的容器</p>
+<p>当<b>步骤 5.3</b>和<b>步骤 5.4</b>都在<b> Power Shell </b>中运行时，那么，<b> Docker Desktop </b>中的<b> container </b>栏中会出现两个新的容器</p>
 
 ![](/imge/20241120dockerdesktop.png)
 
 <p>当下次想重新执行时，直接在<b> Docker Desktop </b>中点击打开这两个容器即可</p>
 
 ## 6、注意事项
-先装WSL，确定版本为WSL2，然后装Docker Desktop，然后再在WSL2中装<b> docker </b>, **防止docker的容器出现消失的情况**
+第一，如果先装docker然后部署镜像，再装Docker Desktop，会出现<b>原先拉取的docker的镜像集体消失的情况。</b> 正确顺序是：先装WSL，确定版本为WSL2，然后装Docker Desktop，然后再在WSL2中装<b> docker </b>
 
-同时，要注意docker在封装ollama容器时，很可能会遗失启动指令，所以**最好不要直接用别人封装后的ollama容器**
+第二，要注意docker在封装ollama容器时，很可能会遗失启动指令，所以<b>最好不要直接用别人封装后的ollama容器</b>
