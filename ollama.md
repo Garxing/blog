@@ -72,6 +72,7 @@ sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io
 ```
 第六步，配置Docker镜像源，前往[华为云镜像](https://console.huaweicloud.com/swr/?region=cn-north-4#/swr/mirror)，在华为云镜像的个人镜像中，点击**镜像加速器**，复制里面的镜像地址
+![](image/../imge/20241120huawei.png)
 ```bash
 1.创建Docker文件夹
 sudo mkdir -p /etc/docker
