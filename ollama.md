@@ -50,28 +50,28 @@ sudo apt update && sudo apt upgrade -y
 ```
 
 ## 3、docker安装
-### 3.1 安装依赖包
+第一步，安装依赖包
 ```bash
 sudo apt install apt-transport-https ca-certificates curl gnupg lsb-release
 ```
 
-### 3.2 添加阿里云镜像源和密钥
+第二步，添加阿里云镜像源和密钥
 ```bash
 curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 ```
-### 3.3 添加阿里云镜像源
+第三步，添加阿里云镜像源
 ```bash
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
-### 3.4 从软件源中更新安装工具包
+第四步，从软件源中更新安装工具包
 ```bash
 sudo apt update
 ```
-### 3.5 安装Docker套件
+第五步，安装Docker套件
 ```bash
 sudo apt install docker-ce docker-ce-cli containerd.io
 ```
-### 3.6 配置Docker镜像源，前往[华为云镜像](https://console.huaweicloud.com/swr/?region=cn-north-4#/swr/mirror)
+第六步，配置Docker镜像源，前往[华为云镜像](https://console.huaweicloud.com/swr/?region=cn-north-4#/swr/mirror)，在华为云镜像的个人镜像中，点击**镜像加速器**，复制里面的镜像地址
 ```bash
 1.创建Docker文件夹
 sudo mkdir -p /etc/docker
@@ -85,7 +85,7 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
-### 3.7 测试镜像源配置成功
+第七步，测试镜像源配置成功
 ```bash
 sudo docker pull hello-world
 ```
