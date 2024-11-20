@@ -96,28 +96,29 @@ sudo docker pull hello-world
 第二步，安装好**Docker Desktop**之后，打开**Docker Desktop**，检查**container**栏，现在应该是空的，不要关闭**Docker Desktop**，后续部署都要保证**Docker Desktop**是打开状态
 
 ## 5、下载 Ollama 和 OpenWebUI 
-### 5.1 下载Ollama CPU版本
+### 5.1 进入WSL
 第一步，用<b>管理员身份</b>进入<b>Windows PowerShell</b>然后输入进入Ubuntu系统，后续部署都是利用**wsl**中的**docker**来进行
 ```bash
 wsl
 ```
-<p><b>CPU版本</b>和<b>GPU版本</b>两个选择一个即可，建议用GPU版本，否则推理速度非常慢</p>
-<p>这里我们需要用docker<b>拉取镜像</b>，并创建名字叫<b>ollama</b>的容器，如果是CPU版本，直接输入</p>
+### 5.2 拉取Ollama的docker镜像
+<p>第二步，用docker<b>拉取镜像</b>，并创建名字叫<b>ollama</b>的容器</p>
+<p>Ollama有CPU版本和GPU版本，CPU版本</b>和<b>GPU版本</b>两个选择一个即可，建议用GPU版本，否则推理速度非常慢</p>
+<p>情况1：CPU版本，直接输入</p>
 
 ```bash
 sudo docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 ```
-### 5.2 下载Ollama GPU版本
-如果是GPU版本，先装[英伟达工具](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installation)，然后再输入
+情况2：GPU版本，先装[英伟达工具](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installation)，然后再输入
 ```bash
 Sudo docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 ```
 ### 5.3 运行 Ollama 库的模型
-下载后，运行<b>ollama2</b>的命令为
+第三步，Ollama容器建立后，直接运行容器，如下命令即可
 ```bash
 docker exec -it ollama ollama run llama2
 ```
-同理，运行<b>Qwen2.5</b>和<b>gemma</b>的命令为，选一行执行
+同理，运行<b>Qwen2.5</b>和<b>gemma</b>的命令为
 ```bash
 docker exec -it ollama ollama run qwen2.5:7b
 ```
@@ -126,20 +127,20 @@ docker exec -it ollama ollama run gemma:7b
 ```
 同时，还可以参考[Ollama库的其余模型](https://ollama.com/library)，直接调用即可
 ### 5.4 安装 OpenWebUI
-用docker安装<b>OpenWebUI</b>，在终端中输入
+第四步，用<b> docker </b>安装<b>OpenWebUI</b>，继续在<b> PowerShell </b>中输入
 ```bash
 docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
 ```
 即可，然后在<b>本地浏览器输入</b>[http://localhost:3000](http://localhost:3000) 中即可看到UI界面，自行创建<b>邮箱和密码</b>即可进入。进入后，即可看到Ollama容器中正在运行的模型。
 
 ### 5.5 打开Docker Desktop
-<p>当<b>5.3</b>和<b>5.4</b>都在终端中运行时，那么，<b>Docker Desktop</b>中的<b>container</b>栏中会出现两个新的容器</p>
+<p>当<b>5.3</b>和<b>5.4</b>都在<b> Power Shell </b>中运行时，那么，<b> Docker Desktop </b>中的<b> container </b>栏中会出现两个新的容器</p>
 
 ![](/imge/20241120dockerdesktop.png)
 
-<p>当下次想重新执行时，直接在<b>Docker Desktop</b>中点击打开这两个容器即可</p>
+<p>当下次想重新执行时，直接在<b> Docker Desktop </b>中点击打开这两个容器即可</p>
 
 ## 6、注意事项
-先装WSL，确定版本为WSL2，然后装Docker Desktop，然后再在WSL2中装docker,**防止docker的容器出现消失的情况**
+先装WSL，确定版本为WSL2，然后装Docker Desktop，然后再在WSL2中装<b> docker </b>, **防止docker的容器出现消失的情况**
 
 同时，要注意docker在封装ollama容器时，很可能会遗失启动指令，所以**最好不要直接用别人封装后的ollama容器**
