@@ -1,37 +1,36 @@
 # 在windows系统下部署Ollama和OpenWebUI
 主要参考了[wsl安装](https://blog.csdn.net/wangtcCSDN/article/details/137950545)和[docker安装](https://blog.csdn.net/qq_43840665/article/details/140684568)两篇博客
 
-### 1、安装WSL
-<p>打开开始菜单，在开始菜单中输入启用或关闭 Windows 功能，在弹出的窗口中勾选<b>虚拟机平台</b>和<b>适用于 Linux 的 Windows 子系统</b>，确定之后<b>重启系统</b>。</p>
+## 1、安装WSL
+<p>第一步，打开开始菜单，在开始菜单中输入启用或关闭 Windows 功能，在弹出的窗口中勾选<b>虚拟机平台</b>和<b>适用于 Linux 的 Windows 子系统</b>，确定之后<b>重启系统</b>。</p>
+<p>第二步，重启电脑后，打开<b>Windows PowerShell</b>用管理员身份运行，执行以下命令，即可成功装入WSL</p>
 
-重启电脑后，打开<b>Windows PowerShell</b>用管理员身份运行，执行
 ```bash
 wsl.exe –update
 ```
-命令，即可装入WSL。
 
-### 2、安装Ubuntu24.04
-#### 2.1 安装Ubuntu
-<p>打开<b>Microsoft Store</b>，搜索Ubuntu并下载，下载完成后，会让你创建用户和密码，然后即可安装成功。</p>
-<p>查询当前安装的 Ubuntu 版本使用下面命令</p>
+## 2、安装Ubuntu24.04
+### 2.1 安装Ubuntu
+<p>第一步，打开<b>Microsoft Store</b>，搜索Ubuntu并下载，下载完成后，会让你创建用户和密码，然后即可安装成功。</p>
+<p>另外，如果想查询当前安装的 Ubuntu 版本使用下面命令</p>
 
 ```bash
 lsb_release -a
 ```  
-#### 2.2 更新清华源
-前往[清华镜像站](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/)即可配置对应的镜像源
+### 2.2 更新清华源
+第二步，前往[清华镜像站](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/)即可配置对应的镜像源，这里有两种情况
 
-<p>如果是<b>ubuntu24.04之前的版本</b>，那么应该用:</p>
+<p>情况1：如果是<b>ubuntu24.04之前的版本</b>，那么应该用:</p>
 
 ```bash
 sudo nano /etc/apt/sources.list
 ```
 
-如果是<b>ubuntu24.04</b>的版本那么要用
+情况2：如果是<b>ubuntu24.04</b>的版本那么要用
 ```bash
 sudo nano /etc/apt/sources.list.d/ubuntu.sources
 ```
-下面是<b>ubuntu24.04</b>的对应软件源：
+第三步，下面是<b>ubuntu24.04</b>的对应软件源：
 ```
 Types: deb
 URIs: https://mirrors.tuna.tsinghua.edu.cn/ubuntu
@@ -45,34 +44,34 @@ Suites: noble-security
 Components: main restricted universe multiverse
 Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 ```
-然后，按下<b>Ctrl + O</b>并<b>Enter</b>保存，再按下<b>Ctrl + X</b>退出 nano，保存之后，输入以下内容更新镜像源
+第四步，按下<b>Ctrl + O</b>并<b>Enter</b>保存，再按下<b>Ctrl + X</b>退出 nano，保存之后，输入以下内容更新镜像源
 ```bash
 sudo apt update && sudo apt upgrade -y
 ```
 
-### 3、docker安装
-#### 3.1 安装依赖包
+## 3、docker安装
+### 3.1 安装依赖包
 ```bash
 sudo apt install apt-transport-https ca-certificates curl gnupg lsb-release
 ```
 
-#### 3.2 添加阿里云镜像源和密钥
+### 3.2 添加阿里云镜像源和密钥
 ```bash
 curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 ```
-#### 3.3 添加阿里云镜像源
+### 3.3 添加阿里云镜像源
 ```bash
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
-#### 3.4 从软件源中更新安装工具包
+### 3.4 从软件源中更新安装工具包
 ```bash
 sudo apt update
 ```
-#### 3.5 安装Docker套件
+### 3.5 安装Docker套件
 ```bash
 sudo apt install docker-ce docker-ce-cli containerd.io
 ```
-#### 3.6 配置Docker镜像源，前往[华为云镜像](https://console.huaweicloud.com/swr/?region=cn-north-4#/swr/mirror)
+### 3.6 配置Docker镜像源，前往[华为云镜像](https://console.huaweicloud.com/swr/?region=cn-north-4#/swr/mirror)
 ```bash
 1.创建Docker文件夹
 sudo mkdir -p /etc/docker
@@ -86,37 +85,34 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
-#### 3.7测试镜像源配置成功
+### 3.7 测试镜像源配置成功
 ```bash
 sudo docker pull hello-world
 ```
 
-### 4、docker desktop安装
-在[docker官网](https://www.docker.com/products/docker-desktop/)里下载<b>docker desktop</b>的windows版本即可
+## 4、docker desktop安装
+第一步，在[docker官网](https://www.docker.com/products/docker-desktop/)里下载<b>docker desktop</b>的windows版本即可
 
-安装好**Docker Desktop**之后，打开**Docker Desktop**，检查**container**栏，现在应该是空的，不要关闭**Docker Desktop**，后续部署都要保证**Docker Desktop**是打开状态
+第二步，安装好**Docker Desktop**之后，打开**Docker Desktop**，检查**container**栏，现在应该是空的，不要关闭**Docker Desktop**，后续部署都要保证**Docker Desktop**是打开状态
 
-### 5、下载 Ollama 和 OpenWebUI 
-用<b>管理员身份</b>进入<b>Windows PowerShell</b>然后输入
+## 5、下载 Ollama 和 OpenWebUI 
+### 5.1 下载Ollama CPU版本
+第一步，用<b>管理员身份</b>进入<b>Windows PowerShell</b>然后输入进入Ubuntu系统，后续部署都是利用**wsl**中的**docker**来进行
 ```bash
 wsl
 ```
-进入Ubuntu系统，后续部署都是利用**wsl**中的**docker**来进行
-
-### 5、装Ollama
-#### 5.1 下载Ollama CPU版本
 <p><b>CPU版本</b>和<b>GPU版本</b>两个选择一个即可，建议用GPU版本，否则推理速度非常慢</p>
 <p>这里我们需要用docker<b>拉取镜像</b>，并创建名字叫<b>ollama</b>的容器，如果是CPU版本，直接输入</p>
 
 ```bash
 sudo docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 ```
-#### 5.2 下载Ollama GPU版本
+### 5.2 下载Ollama GPU版本
 如果是GPU版本，先装[英伟达工具](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installation)，然后再输入
 ```bash
 Sudo docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 ```
-#### 5.3 运行 Ollama 库的模型
+### 5.3 运行 Ollama 库的模型
 下载后，运行<b>ollama2</b>的命令为
 ```bash
 docker exec -it ollama ollama run llama2
@@ -124,24 +120,26 @@ docker exec -it ollama ollama run llama2
 同理，运行<b>Qwen2.5</b>和<b>gemma</b>的命令为，选一行执行
 ```bash
 docker exec -it ollama ollama run qwen2.5:7b
+```
+```bash
 docker exec -it ollama ollama run gemma:7b
 ```
 同时，还可以参考[Ollama库的其余模型](https://ollama.com/library)，直接调用即可
-#### 5.4 安装 OpenWebUI
+### 5.4 安装 OpenWebUI
 用docker安装<b>OpenWebUI</b>，在终端中输入
 ```bash
 docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
 ```
 即可，然后在<b>本地浏览器输入</b>[http://localhost:3000](http://localhost:3000) 中即可看到UI界面，自行创建<b>邮箱和密码</b>即可进入。进入后，即可看到Ollama容器中正在运行的模型。
 
-#### 5.5 打开Docker Desktop
+### 5.5 打开Docker Desktop
 <p>当<b>5.3</b>和<b>5.4</b>都在终端中运行时，那么，<b>Docker Desktop</b>中的<b>container</b>栏中会出现两个新的容器</p>
 
 ![](/imge/20241120dockerdesktop.png)
 
 <p>当下次想重新执行时，直接在<b>Docker Desktop</b>中点击打开这两个容器即可</p>
 
-### 6、注意事项
+## 6、注意事项
 先装WSL，确定版本为WSL2，然后装Docker Desktop，然后再在WSL2中装docker,**防止docker的容器出现消失的情况**
 
 同时，要注意docker在封装ollama容器时，很可能会遗失启动指令，所以**最好不要直接用别人封装后的ollama容器**
