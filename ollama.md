@@ -2,16 +2,13 @@
 主要参考了[wsl安装](https://blog.csdn.net/wangtcCSDN/article/details/137950545)和[docker安装](https://blog.csdn.net/qq_43840665/article/details/140684568)两篇博客
 
 ### 1、安装WSL
-打开开始菜单，在开始菜单中输入启用或关闭 Windows 功能，在弹出的窗口中勾选**虚拟机平台**和**适用于 Linux 的 Windows 子系统**，确定之后**重启系统**。
+<p>打开开始菜单，在开始菜单中输入启用或关闭 Windows 功能，在弹出的窗口中勾选**虚拟机平台**和**适用于 Linux 的 Windows 子系统**，确定之后<b>重启系统</b>。</p>
 
-<!-- 使用 HTML 的 table 标签来并排显示两张图片，并且不显示边框 -->
-<table style="border-collapse: collapse;">
-  <tr>
-    <td style="border: none; padding: 0;"><img src="imge/windows.png" alt="Image 1" style="width:100%; max-width:300px; display:block;"></td>
-    <td style="border: none; padding: 0;"><img src="imge/PowerShell.png" alt="Image 2" style="width:100%; max-width:300px; display:block;"></td>
-  </tr>
-</table>
-重启电脑后，打开**Windows PowerShell**用管理员身份运行，执行`wsl.exe –update`命令，即可装入WSL。
+重启电脑后，打开**Windows PowerShell**用管理员身份运行，执行
+```bash
+wsl.exe –update
+```
+命令，即可装入WSL。
 
 ### 2、安装Ubuntu24.04
 打开**Microsoft Store**，搜索Ubuntu并下载，下载完成后，会让你创建用户和密码，然后即可安装成功。
