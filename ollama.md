@@ -1,6 +1,6 @@
 # 在windows系统下部署Ollama和OpenWebUI
 日期：2024年11月20日
-
+by：ljx
 主要参考了[wsl安装](https://blog.csdn.net/wangtcCSDN/article/details/137950545)和[docker安装](https://blog.csdn.net/qq_43840665/article/details/140684568)两篇博客
 
 ## 1、安装WSL
