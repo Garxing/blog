@@ -113,7 +113,7 @@ sudo docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/o
 ```
 情况2：GPU版本，先装[英伟达工具](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installation)，然后再输入
 ```bash
-Sudo docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+sudo docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 ```
 ### 5.3 运行 Ollama 库的模型
 第三步，Ollama容器建立后，直接运行容器，如下命令即可
